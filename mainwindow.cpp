@@ -1,17 +1,21 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "QFile"
-#include "QFileDialog"
-#include "QTextStream"
-#include"QMessageBox"
-#include <QPlainTextEdit>
+#include "QString"
+#include "string"
+#include "consist.h"
+#include "QMessageBox"
+#include "xmltojson.h"
+
+
+void prettifying(string* text);
+
+using namespace std;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->setCentralWidget(ui->plainTextEdit);
 }
 
 MainWindow::~MainWindow()
@@ -19,117 +23,39 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-void MainWindow::on_actionNew_triggered()
-{
-   file_path="";
-   ui->plainTextEdit->setPlainText("");
-}
-
-
-void MainWindow::on_actionOpen_triggered()
-{
-   QString file_name=QFileDialog::getOpenFileName(this,"open the file");
-   QFile file(file_name);
-   file_path=file_name;
-   if(!file.open(QFile::ReadOnly) | (QFile::Text)){
-       QMessageBox::warning(this,"...","file not open");
-       return;
-
-   }
-   QTextStream in(&file);
-   QString text=in.readAll();
-   ui->plainTextEdit->setPlainText(text);
-   file.close();
-}
-
-
-void MainWindow::on_actionSave_triggered()
-{
-
-    QFile file(file_path);
-    if(!file.open(QFile::WriteOnly) | (QFile::Text)){
-        QMessageBox::warning(this,"...","file not open");
-        return;
-
-    }
-    QTextStream out(&file);
-    QString text=ui->plainTextEdit->toPlainText();
-    out << text;
-    file.flush();
-    file.close();
-}
-
-
-void MainWindow::on_actionSave_as_triggered()
-{
-    QString file_name=QFileDialog::getSaveFileName(this,"open the file");
-    QFile file(file_name);
-    file_path=file_name;
-    if(!file.open(QFile::WriteOnly) |(QFile::Text)){
-        QMessageBox::warning(this,"...","file not open");
-        return;
-
-    }
-    QTextStream out(&file);
-    QString text=ui->plainTextEdit->toPlainText();
-    out << text;
-    file.flush();
-    file.close();
-}
-
-
-void MainWindow::on_actionCut_triggered()
-{
-    ui->plainTextEdit->cut();
-}
-
-
-void MainWindow::on_actionCopy_triggered()
-{
-    ui->plainTextEdit->copy();
-}
-
-
-void MainWindow::on_actionPaste_triggered()
-{
-    ui->plainTextEdit->paste();
-}
-
-
-void MainWindow::on_actionRedo_triggered()
-{
-    ui->plainTextEdit->redo();
-}
-
-
-void MainWindow::on_actionUndo_triggered()
-{
-    ui->plainTextEdit->undo();
-}
-
-
+QString qs;
+string in;
 
 void MainWindow::on_checkError_clicked()
 {
+    qs = ui->input->toPlainText(); //bta5od el kalam mn el text edit
+    in = qs.toStdString(); //
+    bool flag = true;
+    flag = detection(in);
+    if(flag == true){
+        ui->output->setPlainText("True");
+    }
+    else{
+        ui->output->setPlainText("False");
+    }
 
 }
 
 
-void MainWindow::on_formatButton_clicked()
+void MainWindow::on_beautifyButton_clicked()
 {
-
+    qs = ui->input->toPlainText(); //bta5od el kalam mn el text edit
+    string temp = qs.toStdString(); //
+    QString out = QString::fromUtf8(temp);
+    ui->output->setPlainText(out);
+    prettifying(&temp);
+    out = QString::fromUtf8(temp);
+    ui->output->setPlainText(out);
 }
 
-
-void MainWindow::on_convertButton_clicked()
-{
-
+void MainWindow::on_convertButton_clicked() {
+    qs = ui->input->toPlainText(); //bta5od el kalam mn el text edit
+    string in = qs.toStdString(); //
+    string out = convert(&in);
+    ui->output->setPlainText(QString::fromStdString(out));
 }
-
-
-void MainWindow::on_compressButton_clicked()
-{
-
-}
-

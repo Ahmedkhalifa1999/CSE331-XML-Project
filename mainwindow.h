@@ -16,34 +16,13 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_actionNew_triggered();
-
-    void on_actionOpen_triggered();
-
-    void on_actionSave_triggered();
-
-    void on_actionSave_as_triggered();
-
-    void on_actionCut_triggered();
-
-    void on_actionCopy_triggered();
-
-    void on_actionPaste_triggered();
-
-    void on_actionRedo_triggered();
-
-    void on_actionUndo_triggered();
-
     void on_checkError_clicked();
 
-    void on_formatButton_clicked();
+    void on_beautifyButton_clicked();
 
     void on_convertButton_clicked();
 
-    void on_compressButton_clicked();
-
 private:
     Ui::MainWindow *ui;
-    QString file_path;
 };
 #endif // MAINWINDOW_H
