@@ -31,5 +31,5 @@ This function used to convert the xml input as string into json format directly.
  Space complexity : O(n) , n stack size
  Time Complexity : O(n^2)  , xml lines(n) , each line length(m)
 */
-string convert(string *xml);
+void convert(string *xml, string *json);
 #endif /*XML_TO_JSON */
