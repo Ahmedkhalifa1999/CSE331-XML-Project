@@ -59,3 +59,9 @@ void MainWindow::on_convertButton_clicked() {
     string out = convert(&in);
     ui->output->setPlainText(QString::fromStdString(out));
 }
+
+void MainWindow::on_compressButton_clicked()
+{
+
+}
+

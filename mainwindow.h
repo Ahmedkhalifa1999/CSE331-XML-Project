@@ -22,6 +22,8 @@ private slots:
 
     void on_convertButton_clicked();
 
+    void on_compressButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
