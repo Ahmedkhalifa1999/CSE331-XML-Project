@@ -1,7 +1,7 @@
 #include"xml_tree.h"
 /* Tree Node Class */
 
-    tnode::tnode(int data)
+    tnode::tnode(string data)
     {
         this->data = data;
     }
@@ -17,7 +17,7 @@
     {
         return children.size();
     }
-    int tnode:: getData(tnode *node)
+    string tnode:: getData(tnode *node)
     {
         return node->data;
     }

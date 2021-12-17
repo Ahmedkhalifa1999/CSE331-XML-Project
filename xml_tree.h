@@ -4,14 +4,14 @@ using namespace std;
 /* Tree Node Class */
 class tnode
 {
-    int data;
+    string data;
     vector<tnode *> children;
 public:
-    tnode(int data);
+    tnode(string data);
     tnode *getChild(int index);
     void setChild(tnode *node);
     int getSize();
-    int getData(tnode *node);
+    string getData(tnode *node);
 };
 /* Tree Class */
 class tree
