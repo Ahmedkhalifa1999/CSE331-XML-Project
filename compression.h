@@ -3,9 +3,9 @@
 
 #include <string>
 
-typedef struct{
-    char character;
-    unsigned long long frequency;
+typedef struct huffmanNode{
+    char character = 0;
+    unsigned long long frequency = 0;
 } huffmanNode;
 
 std::string compress(std::string* data);

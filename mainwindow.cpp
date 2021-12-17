@@ -2,12 +2,13 @@
 #include "ui_mainwindow.h"
 #include "QString"
 #include "string"
-#include "consist.h"
+#include "Consistency.h"
 #include "QMessageBox"
 #include "xmltojson.h"
 #include "QFile"
 #include "QFileDialog"
 #include "QMessageBox"
+#include "compression.h"
 
 
 void prettifying(string* text);
@@ -68,7 +69,11 @@ void MainWindow::on_convertButton_clicked() {
 
 void MainWindow::on_compressButton_clicked()
 {
-
+    qs = ui->input->toPlainText(); //bta5od el kalam mn el text edit
+    string temp = qs.toStdString(); //
+    string out = compress(&temp);
+    string count = to_string(out.length());
+    ui -> output -> setPlainText(QString::fromStdString(out));
 }
 
 

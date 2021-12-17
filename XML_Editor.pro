@@ -18,6 +18,7 @@ SOURCES += \
     xmltojson.cpp
 
 HEADERS += \
+    Consistency.h \
     binaryTree.h \
     compression.h \
     consist.h \
