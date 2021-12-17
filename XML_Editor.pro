@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     binaryTree.cpp \
+    compression.cpp \
     main.cpp \
     mainwindow.cpp \
     pretty.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
 
 HEADERS += \
     binaryTree.h \
+    compression.h \
     consist.h \
     mainwindow.h \
     pretty.h \
