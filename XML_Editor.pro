@@ -13,6 +13,7 @@ SOURCES += \
     compression.cpp \
     main.cpp \
     mainwindow.cpp \
+    minify.cpp \
     pretty.cpp \
     tree.cpp \
     xmltojson.cpp
@@ -21,8 +22,8 @@ HEADERS += \
     Consistency.h \
     binaryTree.h \
     compression.h \
-    consist.h \
     mainwindow.h \
+    minify.h \
     pretty.h \
     tree.h \
     xmltojson.h
