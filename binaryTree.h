@@ -5,6 +5,7 @@ public:
     binaryTree* left = nullptr;
     binaryTree* right = nullptr;
 
+    binaryTree();
     binaryTree(T data);
 
     binaryTree* getLeft();

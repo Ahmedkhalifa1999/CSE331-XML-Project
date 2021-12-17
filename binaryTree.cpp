@@ -1,4 +1,8 @@
 #include "binaryTree.h"
+#include "compression.h"
+
+template <typename T>
+binaryTree<T>::binaryTree() {}
 
 template <typename T>
 binaryTree<T>::binaryTree(T data) {
@@ -45,3 +49,5 @@ binaryTree<T>::~binaryTree() {
     if (binaryTree<T>::right != nullptr) delete binaryTree<T>::right;
     if (binaryTree<T>::left != nullptr) delete binaryTree<T>::left;
 }
+
+template class binaryTree<huffmanNode>;
