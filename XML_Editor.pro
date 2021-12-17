@@ -14,7 +14,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     minify.cpp \
-    pretty.cpp \
+    prettyxml.cpp \
     tree.cpp \
     xmltojson.cpp
 
@@ -24,7 +24,7 @@ HEADERS += \
     compression.h \
     mainwindow.h \
     minify.h \
-    pretty.h \
+    prettyxml.h \
     tree.h \
     xmltojson.h
 

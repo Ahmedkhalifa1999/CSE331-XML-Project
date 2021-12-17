@@ -10,9 +10,7 @@
 #include "QMessageBox"
 #include "compression.h"
 #include "minify.h"
-
-
-void prettifying(string* text);
+#include "prettyxml.h"
 
 using namespace std;
 
@@ -53,7 +51,7 @@ void MainWindow::on_beautifyButton_clicked()
     qs = ui->input->toPlainText(); //bta5od el kalam mn el text edit
     string temp = qs.toStdString(); //
     temp = minify(&temp);
-    prettifying(&temp);
+    prettyxml(&temp);
     QString out = QString::fromStdString(temp);
     ui->output->setPlainText(out);
 }
