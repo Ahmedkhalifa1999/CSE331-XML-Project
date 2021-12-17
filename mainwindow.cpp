@@ -71,9 +71,10 @@ void MainWindow::on_compressButton_clicked()
 {
     qs = ui->input->toPlainText(); //bta5od el kalam mn el text edit
     string temp = qs.toStdString(); //
+    temp = minify(&temp);
     string out = compress(&temp);
     string count = to_string(out.length());
-    ui -> output -> setPlainText(QString::fromStdString(out));
+    ui -> output -> setPlainText(QString::fromStdString(count));
 }
 
 
