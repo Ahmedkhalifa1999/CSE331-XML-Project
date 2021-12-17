@@ -7,4 +7,6 @@ public:
     tree* getChild(unsigned int index);
     void addChild(tree* child);
     bool isLeaf();
+
+    ~tree();
 };

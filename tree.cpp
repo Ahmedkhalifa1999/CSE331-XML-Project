@@ -12,3 +12,9 @@ void tree::addChild(tree* child) {
 bool tree::isLeaf() {
     return tree::children.empty();
 }
+
+tree::~tree() {
+    for (tree* child: tree::children) {
+        if (child != nullptr) delete child;
+    }
+}

@@ -9,4 +9,5 @@ public:
     void setLeft(binaryTree* child);
     bool isLeaf();
 
+    ~binaryTree();
 };

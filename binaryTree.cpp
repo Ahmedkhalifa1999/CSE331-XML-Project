@@ -19,3 +19,8 @@ void binaryTree::setLeft(binaryTree* child) {
 bool binaryTree::isLeaf() {
     return (binaryTree::left == nullptr) && (binaryTree::right == nullptr);
 }
+
+binaryTree::~binaryTree() {
+    if (binaryTree::right != nullptr) delete binaryTree::right;
+    if (binaryTree::left != nullptr) delete binaryTree::left;
+}
