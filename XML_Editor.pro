@@ -11,11 +11,13 @@ CONFIG += c++11
 SOURCES += \
     binaryTree.cpp \
     compression.cpp \
+    getXML.cpp \
     main.cpp \
     mainwindow.cpp \
     minify.cpp \
     prettyxml.cpp \
     tree.cpp \
+    xml_tree.cpp \
     xmltojson.cpp
 
 HEADERS += \
@@ -26,6 +28,7 @@ HEADERS += \
     minify.h \
     prettyxml.h \
     tree.h \
+    xml_tree.h \
     xmltojson.h
 
 FORMS += \
