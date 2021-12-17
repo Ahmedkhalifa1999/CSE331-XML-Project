@@ -1,26 +1,47 @@
 #include "binaryTree.h"
 
-binaryTree* binaryTree::getRight() {
-    return binaryTree::right;
+template <typename T>
+binaryTree<T>::binaryTree(T data) {
+    binaryTree::data = data;
 }
 
-binaryTree* binaryTree::getLeft() {
+template <typename T>
+binaryTree<T>* binaryTree<T>::getRight() {
+    return binaryTree<T>::right;
+}
+
+template <typename T>
+binaryTree<T>* binaryTree<T>::getLeft() {
     return binaryTree::left;
 }
 
-void binaryTree::setRight(binaryTree* child) {
-    binaryTree::right = child;
+template <typename T>
+void binaryTree<T>::setRight(binaryTree<T>* child) {
+    binaryTree<T>::right = child;
 }
 
-void binaryTree::setLeft(binaryTree* child) {
-    binaryTree::left = child;
+template <typename T>
+void binaryTree<T>::setLeft(binaryTree<T>* child) {
+    binaryTree<T>::left = child;
 }
 
-bool binaryTree::isLeaf() {
-    return (binaryTree::left == nullptr) && (binaryTree::right == nullptr);
+template <typename T>
+void binaryTree<T>::setRight(T data) {
+    binaryTree<T>::right = new binaryTree<T>(data);
 }
 
-binaryTree::~binaryTree() {
-    if (binaryTree::right != nullptr) delete binaryTree::right;
-    if (binaryTree::left != nullptr) delete binaryTree::left;
+template <typename T>
+void binaryTree<T>::setLeft(T data) {
+    binaryTree<T>::left = new binaryTree<T>(data);
+}
+
+template <typename T>
+bool binaryTree<T>::isLeaf() {
+    return (binaryTree<T>::left == nullptr) && (binaryTree<T>::right == nullptr);
+}
+
+template <typename T>
+binaryTree<T>::~binaryTree() {
+    if (binaryTree<T>::right != nullptr) delete binaryTree<T>::right;
+    if (binaryTree<T>::left != nullptr) delete binaryTree<T>::left;
 }
