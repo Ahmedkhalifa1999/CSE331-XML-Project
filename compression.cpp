@@ -114,11 +114,3 @@ std::string compress(std::string *data) {
 std::string decompress(std::string* data) {
 
 }
-
-static binaryTree<huffmanNode> stringToTree(std::string* data) {
-
-}
-
-static std::string treeToString(binaryTree<huffmanNode>* tree) {
-
-}
