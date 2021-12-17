@@ -10,10 +10,10 @@ std::string decompress(std::string* data) {
 
 }
 
-static binaryTree stringToTree(std::string* data) {
+/*static binaryTree stringToTree(std::string* data) {
 
 }
 
 static std::string treeToString(binaryTree* tree) {
 
-}
+}*/

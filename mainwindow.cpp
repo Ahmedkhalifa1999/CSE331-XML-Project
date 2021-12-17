@@ -75,7 +75,7 @@ void MainWindow::on_compressButton_clicked()
 void MainWindow::on_actionNew_triggered()
 {
     file_path="";
-     ui->input->setPlainText("");
+    ui->input->setPlainText("");
 }
 
 
