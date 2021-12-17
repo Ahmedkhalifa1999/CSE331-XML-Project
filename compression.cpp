@@ -27,6 +27,8 @@ std::string compress(std::string *data) {
         binaryTree<huffmanNode>* tree2 = nodes.top();
         nodes.pop();
         binaryTree<huffmanNode>* newTree = new binaryTree<huffmanNode>({0, (tree1 -> data).frequency + (tree2 -> data).frequency});
+        newTree -> setRight(tree1);
+        newTree -> setLeft(tree2);
         nodes.push(newTree);
     }
     binaryTree<huffmanNode>* huffmanTree = nodes.top();
