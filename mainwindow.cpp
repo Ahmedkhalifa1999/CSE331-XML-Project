@@ -84,7 +84,7 @@ void MainWindow::on_actionOpen_triggered()
     QString file_name=QFileDialog::getOpenFileName(this,"open the file");
        QFile file(file_name);
        file_path=file_name;
-       if(!file.open(QFile::ReadOnly) | (QFile::Text)){
+       if(!file.open(QFile::ReadOnly | QFile::Text)){
            QMessageBox::warning(this,"...","file not open");
            return;
 
@@ -99,7 +99,7 @@ void MainWindow::on_actionOpen_triggered()
 void MainWindow::on_actionSave_triggered()
 {
     QFile file(file_path);
-        if(!file.open(QFile::WriteOnly) | (QFile::Text)){
+        if(!file.open(QFile::WriteOnly | QFile::Text)){
             QMessageBox::warning(this,"...","file not open");
             return;
 
@@ -117,7 +117,7 @@ void MainWindow::on_actionSave_as_triggered()
     QString file_name=QFileDialog::getSaveFileName(this,"open the file");
         QFile file(file_name);
         file_path=file_name;
-        if(!file.open(QFile::WriteOnly) |(QFile::Text)){
+        if(!file.open(QFile::WriteOnly | QFile::Text)){
             QMessageBox::warning(this,"...","file not open");
             return;
 

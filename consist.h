@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <stack>
+#include <algorithm>
 
 using namespace std;
 
@@ -29,7 +30,6 @@ bool detection(string &xml)
 
 
     int i = 0;
-    int index = 0;
     while (xml[i] != '\0')
     {
         // loop over the file until you find <
@@ -39,7 +39,6 @@ bool detection(string &xml)
             // check if it's a closing tag
             if (xml[i] == '/')
             {
-                index = i + 1;
                 i++;
                 //store closing tag name in 2nd string
                 while (xml[i] != '>')

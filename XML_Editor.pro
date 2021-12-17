@@ -17,12 +17,11 @@ SOURCES += \
     xmltojson.cpp
 
 HEADERS += \
-    ../../Desktop/prettifying.h \
+    Tree.h \
     binaryTree.h \
     consist.h \
-    fathy.h \
     mainwindow.h \
-    tree.h \
+    pretty.h \
     xmltojson.h
 
 FORMS += \
