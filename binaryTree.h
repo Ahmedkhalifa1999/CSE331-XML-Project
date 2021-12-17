@@ -1,11 +1,7 @@
-template<typename dataType>
 class binaryTree{
 public:
-    dataType data;
-    binaryTree* left;
-    binaryTree* right;
-
-    binaryTree(dataType data);
+    binaryTree* left = nullptr;
+    binaryTree* right = nullptr;
 
     binaryTree* getLeft();
     binaryTree* getRight();
@@ -13,5 +9,4 @@ public:
     void setLeft(binaryTree* child);
     bool isLeaf();
 
-    ~binaryTree();
 };

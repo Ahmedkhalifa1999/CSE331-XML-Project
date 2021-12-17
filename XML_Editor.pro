@@ -17,11 +17,11 @@ SOURCES += \
     xmltojson.cpp
 
 HEADERS += \
-    Tree.h \
     binaryTree.h \
     consist.h \
     mainwindow.h \
     pretty.h \
+    tree.h \
     xmltojson.h
 
 FORMS += \
