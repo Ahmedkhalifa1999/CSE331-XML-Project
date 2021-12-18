@@ -17,10 +17,10 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>80</y>
-      <width>731</width>
-      <height>411</height>
+      <x>10</x>
+      <y>50</y>
+      <width>771</width>
+      <height>451</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -84,6 +84,18 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QPushButton" name="minifyButton">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Minify</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
     </layout>
@@ -91,8 +103,8 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>30</y>
+      <x>170</x>
+      <y>0</y>
       <width>71</width>
       <height>41</height>
      </rect>
@@ -109,8 +121,8 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>30</y>
+      <x>530</x>
+      <y>0</y>
       <width>91</width>
       <height>41</height>
      </rect>

@@ -164,3 +164,9 @@ void MainWindow::on_actionUndo_triggered()
 ui->input->undo();
 }
 
+
+void MainWindow::on_minifyButton_clicked()
+{
+
+}
+

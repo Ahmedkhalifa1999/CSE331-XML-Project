@@ -42,6 +42,8 @@ private slots:
 
     void on_actionUndo_triggered();
 
+    void on_minifyButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     QString file_path;
