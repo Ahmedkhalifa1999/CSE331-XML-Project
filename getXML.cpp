@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 #include"xml_tree.h"
 using namespace std;
-/* used to search for certain character in a given string and return its index*/
 /* remove spacing at start of string */
 string ltrim(const string &s)
 {
