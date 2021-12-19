@@ -49,6 +49,18 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="correctButton">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Correct Error</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="beautifyButton">
          <property name="font">
           <font>
@@ -81,6 +93,18 @@
          </property>
          <property name="text">
           <string>Compress</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="decompressButton">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Decompress</string>
          </property>
         </widget>
        </item>

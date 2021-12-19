@@ -40,7 +40,8 @@ void MainWindow::on_checkError_clicked()
         ui->output->setPlainText("True");
     }
     else{
-        ui->output->setPlainText("False");
+        ui->output->setPlainText("False\n");
+        ui->output->setPlainText("To correct the error please press the Correct Error button below");
     }
 
 }
@@ -166,6 +167,18 @@ ui->input->undo();
 
 
 void MainWindow::on_minifyButton_clicked()
+{
+
+}
+
+
+void MainWindow::on_correctButton_clicked()
+{
+
+}
+
+
+void MainWindow::on_decompressButton_clicked()
 {
 
 }

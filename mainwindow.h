@@ -44,6 +44,10 @@ private slots:
 
     void on_minifyButton_clicked();
 
+    void on_correctButton_clicked();
+
+    void on_decompressButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     QString file_path;
