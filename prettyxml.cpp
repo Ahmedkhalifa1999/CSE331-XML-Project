@@ -2,7 +2,7 @@
 #include <string>
 #include <queue>
 using namespace std;
- 
+
 /*
 *Function to repeat a string n times its used to repeat tabs
 *time complexity = O(m)
@@ -25,12 +25,12 @@ string repeat(string s, int n) {
 void prettyxml(string* text)
 {
 	//creating new string s to hold the old string modified
-	string x = "",s="";     //string x to substring the orginal string 
+	string x = "",s="";     //string x to substring the orginal string
 	string t("    ");
 	string n("\n");
 	queue <string> q;      //creating queue to hold the opening and closing tags and the data
 	long i = 0, flag;      //flag for the number of characters in tags and data
-	int flagt = 1;         //flag for the number of tabs  
+	int flagt = 1;         //flag for the number of tabs
 	while (i != text->size())
 	{
 		flag = 0;          //intializing the flag
@@ -41,7 +41,7 @@ void prettyxml(string* text)
 				flag++;
 			}
 			flag++;
-			x = text->substr(i, flag); 
+			x = text->substr(i, flag);
 			q.push(x);     //pushing opening and closing tag into the queue
 			i = i + flag;
 		}
@@ -69,8 +69,6 @@ void prettyxml(string* text)
 				s += repeat(t, flagt);
 				s = s + x;
 				s = s + n;
-				/*s += repeat(t, flagt);
-				flagt++;*/
 				q.pop();
 				if (!q.empty())
 				{
@@ -88,11 +86,6 @@ void prettyxml(string* text)
 			//opening tag
 			else
 			{
-				/*if (flagt != 1)
-				{
-					s += repeat(t, flagt);
-					flagt++;
-				}*/
 				s = s + x;
 				s = s + n;
 				s += repeat(t, flagt);
@@ -105,8 +98,6 @@ void prettyxml(string* text)
 		{
 			s = s + x;
 			s = s + n;
-			//s += repeat(t, flagt);
-			//flagt--;
 			q.pop();
 		}
 	}
