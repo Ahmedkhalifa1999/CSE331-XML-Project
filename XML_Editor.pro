@@ -11,7 +11,7 @@ CONFIG += c++11
 SOURCES += \
     binaryTree.cpp \
     compression.cpp \
-    getXML.cpp \
+    consistency.cpp \
     main.cpp \
     mainwindow.cpp \
     minify.cpp \
@@ -21,9 +21,9 @@ SOURCES += \
     xmltojson.cpp
 
 HEADERS += \
-    Consistency.h \
     binaryTree.h \
     compression.h \
+    consistency.h \
     mainwindow.h \
     minify.h \
     prettyxml.h \
