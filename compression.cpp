@@ -5,7 +5,8 @@
 #include <bitset>
 
 static bool compareNodes(binaryTree<huffmanNode>* elem1, binaryTree<huffmanNode>* elem2);
-static std::vector<huffmanCode> getHuffmanCodes(binaryTree<huffmanNode>* tree);
+static huffmanCode getHuffmanCode(binaryTree<huffmanNode>* tree, char character);
+static void ArrayifyTree(binaryTree<huffmanNode>* tree, char array[], int index = 0);
 
 std::string compress(std::string *data) {
     //Creating freuqncy array for elements
@@ -35,9 +36,8 @@ std::string compress(std::string *data) {
 
     //Building translation table
     huffmanCode translations[256];
-    std::vector<huffmanCode> huffmanCodes = getHuffmanCodes(huffmanTree);
-    for (huffmanCode code: huffmanCodes) {
-        translations[(int)code.character] = code;
+    for (int i = 0; i < 256; i++) {
+        if (frequencyArray[i] > 0) translations[i] = getHuffmanCode(huffmanTree, (char) i);
     }
 
     //Encoding text according to translation table
@@ -68,9 +68,16 @@ std::string compress(std::string *data) {
 
     //Encoding huffman tree as text
     std::string tree;
-    tree.push_back(huffmanTree -> getDepth());
-    //Code not implemented yet
-
+    int depth = huffmanTree -> getDepth();
+    tree.push_back((char)depth);
+    char array[(depth * depth) - 1];
+    for (int i = 0; i < (depth * depth) - 1; i++) {
+        array[i] = 0;
+    }
+    ArrayifyTree(huffmanTree, array);
+    for (char character: array) {
+        tree.push_back(character);
+    }
 
     delete huffmanTree; //delete dynamically allocated binary huffman tree
 
@@ -85,6 +92,36 @@ static bool compareNodes(binaryTree<huffmanNode>* elem1, binaryTree<huffmanNode>
     return (elem1->data).frequency > (elem2->data).frequency;
 }
 
-static std::vector<huffmanCode> getHuffmanCodes(binaryTree<huffmanNode>* tree) {
-    //Code not implemented yet
+static huffmanCode getHuffmanCode(binaryTree<huffmanNode>* tree, char character) {
+    if (tree->data.character == 0) {
+        huffmanCode right = getHuffmanCode(tree->getRight(), character);
+        huffmanCode left = getHuffmanCode(tree->getLeft(), character);
+        if (right.length != -1) {
+            right.code[right.length] = 1;
+            right.length++;
+            return right;
+        }
+        else if (left.length != -1) {
+            left.code[left.length] = 0;
+            left.length++;
+            return left;
+        }
+        else {
+            return huffmanCode{};
+        }
+    }
+    else if (tree->data.character == character) {
+        huffmanCode initial;
+        initial.length++;
+        return initial;
+    }
+    else {
+        return huffmanCode{};
+    }
+}
+
+static void ArrayifyTree(binaryTree<huffmanNode>* tree, char array[] , int index) {
+    array[index] = tree->data.character;
+    if (tree->getRight() != nullptr) ArrayifyTree(tree->getRight(), array, 2 * index + 1);
+    if (tree->getLeft() != nullptr) ArrayifyTree(tree->getLeft(), array, 2 * index + 2);
 }

@@ -10,9 +10,9 @@ typedef struct huffmanNode{
 } huffmanNode;
 
 typedef struct huffmanCode{
-    char character;
+    char character = 0;
     std::bitset<256> code;
-    int length;
+    int length = -1;
 } huffmanCode;
 
 std::string compress(std::string* data);
