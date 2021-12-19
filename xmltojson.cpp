@@ -43,12 +43,12 @@ This function used to convert the xml input as string into json format directly.
  Space complexity : O(n) , n stack size
  Time Complexity : O(n^2)  , xml lines(n) , each line length(m)
 */
-string convert(string *xml)
+string convertt(string *xml)
 {
 
     string json;
-    vector<string> x;
-    vector<string> j;
+    vector<string> x(1);
+    vector<string> j(1);
     int l = 0;
     int prev = -1, i;
     for (i = 0; i < (*xml).length(); i++)
@@ -62,14 +62,16 @@ string convert(string *xml)
     x.push_back((*xml).substr(prev, i - prev));
     int end2;
     string s, s1, s2 = "";
+    string s3;
     int k = 1;
     int flag = 0;
+    int level = -1 ;
     stack<string> tags; //build a stack that reads tags to save them till upcoming correspoding closing tag
-
     j[0] = "{\n";
     for (auto i = x.begin(); i != x.end(); i++)
     {
-        s = *i;
+        s3 = *i;
+        s = minify(&s3);
         //now we want to get index of '<' and '>' to extract tag name from it
         //if we find indeces not = -1 then we are either at start or end tag
         int tagname_start = get_index(s, '<') + 1;
@@ -77,15 +79,21 @@ string convert(string *xml)
         if (s[tagname_start] == '/')
         {
             s1 = s.substr(tagname_start + 1, tagname_end - (tagname_start)); //O(n)
-            s2 = s1;                                                         //we save it to see it there's another tag on its level
-            j.push_back(insertSpacing(tags.top().length() + 2) + "}\n");
+            s2 = s1;
+            level--;                                                         //we save it to see it there's another tag on its level
+            j.push_back(insertSpacing( level + 7  ) + "}\n");
             tags.pop(); //O(1)
         }
         //in case the line is not a closing or opening tag but attribute value
         else if (tagname_start == 0 && tagname_end == -2)
         {
-            if (flag)                                                     //y3ny ana gwa nafs el tag
-                j.push_back(insertSpacing(tags.top().length()) + s + ""); //saving attribute value
+            s = rtrim(s);
+            if (flag)
+            {
+                level ++;                                                    //y3ny ana gwa nafs el tag
+                j.push_back(insertSpacing( level + 10 )+'"' + s + '"'+ '\n'); //saving attribute value
+                level--;
+            }
             else
                 continue;
         }
@@ -94,11 +102,12 @@ string convert(string *xml)
         {
             s1 = s.substr(tagname_start, tagname_end - tagname_start + 1); //O(n)
             tags.push(s1);
+            level++;
             flag = 1;     // setting flag means that we are somewhere between openning and closing tags
             if (s1 != s2) //check if children belongs to the same parent or not
-                j.push_back(insertSpacing(tags.top().length()) + "'" + s1 + "'" + ":" + "{\n");
+                j.push_back(insertSpacing( level + 3 )+'"' + s1 + '"'+ ":" + "{\n");
             else
-                j.push_back(insertSpacing(tags.top().length()) + ", {\n");
+                j.push_back(insertSpacing( level + 3 - 2 ) + ", {\n");
         }
     }
     j.push_back("}");
