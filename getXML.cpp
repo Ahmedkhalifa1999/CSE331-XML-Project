@@ -2,15 +2,6 @@
 #include"xml_tree.h"
 using namespace std;
 /* used to search for certain character in a given string and return its index*/
-int get_index(string s, char c)
-{
-    for (int i = 0; i < s.length(); i++)
-    {
-        if (s[i] == c)
-            return i;
-    }
-    return -1;
-}
 /* remove spacing at start of string */
 string ltrim(const string &s)
 {
