@@ -50,4 +50,13 @@ binaryTree<T>::~binaryTree() {
     if (binaryTree<T>::left != nullptr) delete binaryTree<T>::left;
 }
 
+template <typename T>
+int binaryTree<T>::getDepth() {
+    if (binaryTree<T>::right == nullptr && binaryTree<T>::left == nullptr) return 1;
+    int rightDepth = binaryTree<T>::right -> getDepth();
+    int leftDepth = binaryTree<T>::left -> getDepth();
+    return 1 + ((rightDepth > leftDepth)? rightDepth : leftDepth);
+}
+
 template class binaryTree<huffmanNode>;
+template class binaryTree<huffmanCode>;

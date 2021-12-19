@@ -15,6 +15,7 @@ public:
     void setRight(T data);
     void setLeft(T data);
     bool isLeaf();
+    int getDepth();
 
     ~binaryTree();
 };
