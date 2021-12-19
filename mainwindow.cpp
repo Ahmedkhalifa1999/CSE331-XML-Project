@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include "QString"
 #include "string"
-#include "Consistency.h"
+#include "consistency.h"
 #include "QMessageBox"
 #include "xmltojson.h"
 #include "QFile"

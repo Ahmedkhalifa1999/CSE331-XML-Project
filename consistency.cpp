@@ -1,5 +1,8 @@
 
-#include "Consistency.h"
+#include "consistency.h"
+
+stack<string> errortag;
+
 using namespace std;
 /*
  Description:
