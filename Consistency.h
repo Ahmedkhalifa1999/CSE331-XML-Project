@@ -4,7 +4,6 @@
 #include <algorithm>
 
 using namespace std;
-stack<string> errortag;
 //vector<char> error_location;
 /*
  Description:
