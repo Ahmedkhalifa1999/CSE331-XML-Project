@@ -86,7 +86,17 @@ std::string compress(std::string *data) {
 }
 
 std::string decompress(std::string* data) {
+    binaryTree<char>* root = new binaryTree<char>;
+    int index = 0;
+    //Build huffman tree
 
+
+    //Decode Text according to huffman tree
+    std::string text;
+
+    delete root; //delete dynamically allocated binary huffman tree
+
+    return text;
 }
 
 static bool compareNodes(binaryTree<huffmanNode>* elem1, binaryTree<huffmanNode>* elem2) {
