@@ -42,7 +42,7 @@ std::string compress(std::string *data) {
     }
 
     std::string text;
-    //Encoding huffman tree as text
+    //Encoding huffman tree as text (INEFFICIENT FOR SMALL FILES)
     int depth = huffmanTree -> getDepth();
     text.push_back((char)depth);
     char array[power(2, depth) - 1];

@@ -2,6 +2,7 @@
 #define MINIFY_H
 
 #include <string>
+
 using namespace std;
 string minify(string* text);
 
