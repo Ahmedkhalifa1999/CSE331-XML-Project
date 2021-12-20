@@ -60,3 +60,4 @@ int binaryTree<T>::getDepth() {
 
 template class binaryTree<huffmanNode>;
 template class binaryTree<huffmanCode>;
+template class binaryTree<char>;
