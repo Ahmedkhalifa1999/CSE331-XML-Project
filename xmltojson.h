@@ -13,14 +13,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 /*
-Time & Space Complexity Analysis : 
+Time & Space Complexity Analysis :
 Time complexity : O(n) , n string length
 Space complexity : O(1)
 */
 int get_index(string s, char c);
 
 /*
-Time & Space Complexity Analysis : 
+Time & Space Complexity Analysis :
 Time complexity : O(n) , n space count/string length
 Space complexity : O(1)
 */
@@ -31,5 +31,5 @@ This function used to convert the xml input as string into json format directly.
  Space complexity : O(n) , n stack size
  Time Complexity : O(n^2)  , xml lines(n) , each line length(m)
 */
-void convert(string *xml, string *json);
+string convert(string *xml)
 #endif /*XML_TO_JSON */
