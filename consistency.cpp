@@ -4,24 +4,11 @@
 stack<string> errortag;
 
 using namespace std;
-/*
- Description:
-	 -> this functions loops over xml string by character and checks for
-		opening and closing tags in terms of correctness and matching.
 
-	 -> this function stores the opening tags and check them against closing tags.
-	 -> if they match the content of stack is cleared and the function returns true.
-	 -> if they don't match then the function returns false.
-	 -> if a closing tag is missing, the stack is not empty and the function returns false.
-
-	 time complexity = O(n)
-	 space complexity = O(n)
-	 where n is size of the string.
-
-*/
 bool detection(string& xml)
 {
 	stack<char> s1; //to store tags
+	stack<string> buffer;
 
 	// strings to compare tag names
 	string tag1;
@@ -67,27 +54,33 @@ bool detection(string& xml)
 				// compare opening and closing tag names
 				if (tag1 != tag2)
 				{
-					errortag.push(tag1);
-					cout << "missing closing tag for " << tag1 << endl;
-					i = index - 3;
-
-					// if mismatch delete closing tag name and replace with the correct name
-					/*int j = 0;
-					while (xml[j] != '>')
+					buffer.push(tag1);
+					if (s1.empty())
 					{
-						j++;
+
+						while (!buffer.empty())
+						{
+							int j;
+							string copy = buffer.top();
+							s1.push('<');
+							for (j = 0; j < copy.size(); j++)
+							{
+								s1.push(copy[j]);
+							}
+							s1.push('>');
+							buffer.pop();
+						}
+						cout << "missing opening tag for -> " << tag2 << endl;
+						errortag.push(tag2);
 					}
-					//tag1.append(">");
-					xml.erase(index, j - 2);
-					xml.insert(index, tag1);*/
-
+					else
+					{
+						i = index - 3;
+					}
 
 
 				}
-				else
-				{
 
-				}
 				tag1.clear();
 				tag2.clear();
 
@@ -107,6 +100,15 @@ bool detection(string& xml)
 			}
 		}
 		i++;
+	}
+
+	while (!buffer.empty())
+	{
+		cout << "missing closing tag for -> " << buffer.top() << endl;
+		string temp = "/";
+		temp.append(buffer.top());
+		errortag.push(temp);
+		buffer.pop();
 	}
 
 	// if stack is empty then the file is consistent
