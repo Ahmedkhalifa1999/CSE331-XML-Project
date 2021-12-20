@@ -83,9 +83,9 @@ std::string compress(std::string *data) {
     return text;
 }
 
-std::string decompress(std::string* data) {
+/*std::string decompress(std::string* data) {
 
-}
+}*/
 
 static bool compareNodes(binaryTree<huffmanNode>* elem1, binaryTree<huffmanNode>* elem2) {
     return (elem1->data).frequency > (elem2->data).frequency;

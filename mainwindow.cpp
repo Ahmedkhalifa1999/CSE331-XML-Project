@@ -58,12 +58,12 @@ void MainWindow::on_beautifyButton_clicked()
 }
 
 void MainWindow::on_convertButton_clicked() {
-    /*
+
     qs = ui->input->toPlainText(); //bta5od el kalam mn el text edit
     string in = qs.toStdString(); //
     string out = convert(&in);
     ui->output->setPlainText(QString::fromStdString(out));
-    */
+
 }
 
 void MainWindow::on_compressButton_clicked()

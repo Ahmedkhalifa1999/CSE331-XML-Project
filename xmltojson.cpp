@@ -8,7 +8,13 @@
  *
  **********************************************************************/
 #include "xmltojson.h"
-
+#include "minify.h"
+/* remove spacing at end of string */
+string rtrim(const string &s)
+{
+    int end = s.find_last_not_of(" \n\r\t\f\v");
+    return (end == string::npos) ? "" : s.substr(0, end + 1);
+}
 /*
 Time & Space Complexity Analysis :
 Time complexity : O(n) , n string length
@@ -43,7 +49,7 @@ This function used to convert the xml input as string into json format directly.
  Space complexity : O(n) , n stack size
  Time Complexity : O(n^2)  , xml lines(n) , each line length(m)
 */
-string convertt(string *xml)
+string convert(string *xml)
 {
 
     string json;
@@ -60,10 +66,8 @@ string convertt(string *xml)
         }
     }
     x.push_back((*xml).substr(prev, i - prev));
-    int end2;
     string s, s1, s2 = "";
     string s3;
-    int k = 1;
     int flag = 0;
     int level = -1 ;
     stack<string> tags; //build a stack that reads tags to save them till upcoming correspoding closing tag
