@@ -1,7 +1,8 @@
 
 #include "consistency.h"
 
-stack<string> errortag;
+queue<string> errortag;
+queue<int> position;
 
 using namespace std;
 
@@ -70,6 +71,7 @@ bool detection(string& xml)
 							s1.push('>');
 							buffer.pop();
 						}
+						position.push(index - 1);
 						cout << "missing opening tag for -> " << tag2 << endl;
 						errortag.push(tag2);
 					}
@@ -123,17 +125,71 @@ bool detection(string& xml)
 // General solution
 string correction(string& xml)
 {
-	string closingtag = "</";
+	string tag = "";
+	bool flag;
 	while (!errortag.empty())
 	{
-
-		closingtag = closingtag + errortag.top();
-		errortag.pop();
-
-		closingtag.append(">");
-		xml.append(closingtag);
-		closingtag = "</";
+		tag = errortag.front();
+		if (tag[0] == '/')
+		{
+			tag = tag.substr(1, tag.size());
+			flag = locate(tag, xml, '/');
+		}
+		else
+		{
+			flag = locate(tag, xml, 0);
+		}
+		if (flag)
+		{
+			errortag.pop();
+		}
 	}
 
 	return xml;
+}
+bool locate(string tagname, string& xml, char type)
+{
+	static int tag_pos[11];
+	int i = 0;
+	static int addedsize = 0;
+
+	if (tagname == "topic" || tagname == "body" || tagname == "id" || tagname == "name")
+	{
+		if (type == '/')
+		{
+			i = xml.find(tagname + '>', tag_pos[8]);
+			if (i == string::npos)
+			{
+				i = xml.find(tagname + '>', 0);
+			}
+			i = xml.find("<", i);
+			if ((xml[i + 1] != '/') || (xml[i + 2] != tagname[0]))
+			{
+				xml.insert(i - 1, "</" + tagname + ">\n");
+				return true;
+			}
+			if (tagname == "topic" && xml[i + 7] == 's')
+			{
+				xml.insert(i - 1, "</" + tagname + ">\n");
+				return true;
+			}
+
+			while (xml[i++] != '>');
+			tag_pos[8] = i + 1;
+		}
+		else
+		{
+			i = position.front() + addedsize;
+			while (xml[i--] != '>');
+			string opening = "<" + tagname + ">\n";
+			xml.insert(i + 2, "<" + tagname + ">\n");
+			addedsize += opening.size();
+			position.pop();
+			return true;
+		}
+	}
+
+
+	return false;
+
 }

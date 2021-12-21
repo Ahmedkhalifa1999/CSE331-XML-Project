@@ -15,6 +15,7 @@
 #include <iostream>
 #include <stack>
 #include <algorithm>
+#include <queue>
 
 using namespace std;
 /*************************************************
@@ -59,5 +60,7 @@ bool detection(string& xml);
  *
  *****************************************************************/
 string correction(string& xml);
+
+bool locate(string tagname, string& xml, char type);
 
 #endif /* CONSISTENCY_H_ */
