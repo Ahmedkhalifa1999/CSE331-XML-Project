@@ -10,7 +10,7 @@ static void arrayifyTree(binaryTree<huffmanNode>* tree, char array[], int index 
 static long long power(long long base, long long exp);
 static binaryTree<char>* treeifyArray(char array[], int index = 0);
 static std::vector<char> compressArrayifiedTree(char array[], int length);
-static char* decompressArrayifiedTree(std::vector<char> vector, int length);
+static char* decompressArrayifiedTree(char* compressed, int length);
 
 std::string compress(std::string *data) {
     //Creating freuqncy array for elements
@@ -189,14 +189,14 @@ static std::vector<char> compressArrayifiedTree(char array[], int length) {
     std::vector<char> compressed;
     compressed.push_back(0);
     int i = 0;
-    while (array[i] == 0) {
+    while (array[i] == 0 && (unsigned char)compressed.back() < (unsigned char)255) {
         compressed.back()++;
         i++;
     }
     for (; i < length; i++) {
         compressed.push_back(array[i]);
         compressed.push_back(0);
-        while (array[i] == 0) {
+        while (array[i] == 0 && (unsigned char)compressed.back() < (unsigned char)255) {
             compressed.back()++;
             i++;
         }
@@ -205,19 +205,22 @@ static std::vector<char> compressArrayifiedTree(char array[], int length) {
 }
 
 //UNTESTED
-static char* decompressArrayifiedTree(std::vector<char> vector, int length) {
+static char* decompressArrayifiedTree(char* compressed, int length) {
     int compressedIndex = 0;
     int uncompressedIndex = 0;
     char* uncompressed = new char[length];
-    int zeroCount = vector[compressedIndex++];
+    int zeroCount = compressed[compressedIndex++] << 8;
+    zeroCount |= compressed[compressedIndex++];
     while(zeroCount > 0) {
         uncompressed[uncompressedIndex++] = 0;
+        zeroCount--;
     }
-    while((unsigned long long)compressedIndex < vector.size()) {
-        uncompressed[uncompressedIndex++] = vector[compressedIndex++];
-        zeroCount = vector[compressedIndex++];
+    while(uncompressedIndex < length) {
+        uncompressed[uncompressedIndex++] = compressed[compressedIndex++];
+        zeroCount = compressed[compressedIndex++];
         while(zeroCount > 0) {
             uncompressed[uncompressedIndex++] = 0;
+            zeroCount--;
         }
     }
     return uncompressed;

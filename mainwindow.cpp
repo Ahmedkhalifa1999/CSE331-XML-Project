@@ -72,10 +72,10 @@ void MainWindow::on_compressButton_clicked()
     string temp = qs.toStdString(); //
     string minified = minify(&temp);
     string compressed = compress(&minified);
-    //string decompressed = decompress(&compressed);
-    //prettyxml(&decompressed);
+    string decompressed = decompress(&compressed);
+    prettyxml(&decompressed);
     string count = to_string(compressed.length());
-    ui -> output -> setPlainText(QString::fromStdString(count));
+    ui -> output -> setPlainText(QString::fromStdString(decompressed));
 }
 
 
