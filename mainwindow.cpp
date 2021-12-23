@@ -57,13 +57,12 @@ void MainWindow::on_convertButton_clicked() {
     string json = xmltojson(&minified);
     QString output = QString::fromStdString(json);
     ui->output->setPlainText(output);
-
 }
 
 void MainWindow::on_compressButton_clicked()
 {
-    //Use fstream instead of Qstream to make it work
     /*
+    //Use fstream instead of Qstream to make it work or figure out a way around Qt enforcing UTF-8 encoding
     string input = ui->input->toPlainText().toStdString();
     input = minify(&input);
     string compressed = compress(&input);
@@ -89,7 +88,6 @@ void MainWindow::on_compressButton_clicked()
     prettyxml(&decompressed);
     QString output = QString::fromStdString(decompressed);
     ui->output->setPlainText(output);
-
 }
 
 void MainWindow::on_minifyButton_clicked()
