@@ -3,6 +3,7 @@
 #include <vector>
 #include <queue>
 #include <bitset>
+#include <ctype.h>
 
 static bool compareNodes(binaryTree<huffmanNode>* elem1, binaryTree<huffmanNode>* elem2);
 static huffmanCode getHuffmanCode(binaryTree<huffmanNode>* tree, char character);
@@ -11,6 +12,28 @@ static long long power(long long base, long long exp);
 static binaryTree<char>* treeifyArray(char array[], int index = 0);
 static std::vector<char> compressArrayifiedTree(char array[], int length);
 static char* decompressArrayifiedTree(char* compressed, int length);
+
+std::string minify(std::string* text) {
+    std::string minified;
+    bool isTag = false;
+    bool isText = false;
+    unsigned long long length = text->length();
+    for (unsigned int i = 0; i < length; i++) {
+        char character = text -> at(i);
+        if (character == '<') {
+            isTag = true;
+            isText = false;
+            while(isspace(minified[minified.length()-1])) minified.pop_back();
+        }
+        else if (character == '>') isTag = false;
+        else if (!isTag && !isText) {
+            if (isspace(character)) continue;
+            else isText = true;
+        }
+        minified.push_back(character);
+    }
+    return minified;
+}
 
 std::string compress(std::string *data) {
     //Creating freuqncy array for elements
