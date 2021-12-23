@@ -1,8 +1,8 @@
 #ifndef XML_TREE
 #define X XML_TREE
 
-#include "xml_tree.h"
-#include "minify.h"
+#include "XMLtoJSON/xml_tree.h"
+#include "compression.h"
 /*
 
    FUNCTION DESCRIPTION :
@@ -16,6 +16,6 @@
    *BASE CASE* : found opening tag , data not contain another opening tag then it's leaf
 
 */
-*tnode build_XML_Tree(std::string s);
+void build_XML_Tree(std::string s);
 
 #endif // XML_TREE
