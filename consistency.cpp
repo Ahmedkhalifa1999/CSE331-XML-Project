@@ -174,7 +174,7 @@ string correction(string& xml)
 	bool flag;
 	while (!errortag.empty())
 	{
-		tag = errortag.front();
+        //tag = errortag.front();
 		if (tag[0] == '/')
 		{
 			tag = tag.substr(1, tag.size());

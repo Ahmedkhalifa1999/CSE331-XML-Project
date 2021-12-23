@@ -36,7 +36,7 @@ void MainWindow::on_checkError_clicked()
     qs = ui->input->toPlainText(); //bta5od el kalam mn el text edit
     in = qs.toStdString(); //
     bool flag = true;
-    flag = detection(in);
+    //flag = detection(in);
     if(flag == true){
         ui->output->setPlainText("True");
     }
