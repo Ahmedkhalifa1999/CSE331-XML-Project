@@ -63,9 +63,9 @@ void MainWindow::on_convertButton_clicked() {
     qs = ui->input->toPlainText(); //bta5od el kalam mn el text edit
     string in = qs.toStdString();
     string minified = minify(&in);
-    //string out = convert(&in);
-    tnode* root = build_XML_Tree2(minified);
-    //ui->output->setPlainText(QString::fromStdString(out));
+    string out = convert(&in);
+    //tnode* root = build_XML_Tree2(minified);
+    ui->output->setPlainText(QString::fromStdString(out));
 
 }
 
