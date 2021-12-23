@@ -9,7 +9,6 @@ class tnode
     string name;
     vector<tnode *> children;
 public:
-    //tnode();
     tnode *getChild(int index);
     void setChild(tnode *node);
     int getSize();
@@ -21,7 +20,6 @@ class tree
 {
     tnode *root;
 public:
-    tree();
     void setRoot(tnode *root);
 };
-tnode* build_XML_Tree2(string xml);
+tnode* build_XML_Tree(string xml);

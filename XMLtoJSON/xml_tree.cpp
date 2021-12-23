@@ -1,7 +1,5 @@
 #include"xml_tree.h"
 /* Tree Node Class */
-
-
     tnode *  tnode:: getChild(int index)
     {
         return children[index];
@@ -27,7 +25,7 @@
     {
         this->root = root;
     }
-    tnode *build_XML_Tree2(string xml)
+    tnode *build_XML_Tree(string xml)
     {
         /**/
         tnode *result = new tnode();
