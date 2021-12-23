@@ -14,7 +14,6 @@ SOURCES += \
     consistency.cpp \
     main.cpp \
     mainwindow.cpp \
-    minify.cpp \
     prettyxml.cpp \
     tree.cpp \
     xml_tree.cpp \
@@ -25,7 +24,6 @@ HEADERS += \
     compression.h \
     consistency.h \
     mainwindow.h \
-    minify.h \
     prettyxml.h \
     tree.h \
     xml_tree.h \
