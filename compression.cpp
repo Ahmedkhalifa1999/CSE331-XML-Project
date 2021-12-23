@@ -6,8 +6,11 @@
 
 static bool compareNodes(binaryTree<huffmanNode>* elem1, binaryTree<huffmanNode>* elem2);
 static huffmanCode getHuffmanCode(binaryTree<huffmanNode>* tree, char character);
-static void ArrayifyTree(binaryTree<huffmanNode>* tree, char array[], int index = 0);
+static void arrayifyTree(binaryTree<huffmanNode>* tree, char array[], int index = 0);
 static long long power(long long base, long long exp);
+static binaryTree<char>* treeifyArray(char array[], int index = 0);
+static std::vector<char> compressArrayifiedTree(char array[], int length);
+static char* decompressArrayifiedTree(std::vector<char> vector, int length);
 
 std::string compress(std::string *data) {
     //Creating freuqncy array for elements
@@ -49,7 +52,7 @@ std::string compress(std::string *data) {
     for (int i = 0; i < (depth * depth) - 1; i++) {
         array[i] = 0;
     }
-    ArrayifyTree(huffmanTree, array);
+    arrayifyTree(huffmanTree, array);
     for (char character: array) {
         text.push_back(character);
     }
@@ -86,15 +89,42 @@ std::string compress(std::string *data) {
 }
 
 std::string decompress(std::string* data) {
-    binaryTree<char>* root = new binaryTree<char>;
-    int index = 0;
     //Build huffman tree
-
+    char depth = data->at(0);
+    char* treeArray = data->data() + 1;
+    binaryTree<char>* huffmanTree = treeifyArray(treeArray);
 
     //Decode Text according to huffman tree
+    //Get string length in bits from code
+    int index = power(2, depth);
+    unsigned long long totalBitCount = 0;
+    for (int i = 7; i >= 0; i--) {
+        totalBitCount |= (data->at(index) << i*8);
+        index++;
+    }
+    //Get actual text from code
     std::string text;
+    std::string compressed = data->substr(index);
+    binaryTree<char>* currentNode = huffmanTree;
+    unsigned long long currentBitCount = 0;
+    for (char byte: compressed) {
+        for (int i = 7; i >= 0; i--) {
+            currentBitCount++;
+            if ((byte & (1 << i)) == 0) {
+                currentNode = currentNode->getLeft();
+            }
+            else {
+                currentNode = currentNode->getRight();
+            }
+            if (currentNode->isLeaf()) {
+                text.push_back(currentNode->data);
+                currentNode = huffmanTree;
+                if (currentBitCount == totalBitCount) break;
+            }
+        }
+    }
 
-    delete root; //delete dynamically allocated binary huffman tree
+    delete huffmanTree; //delete dynamically allocated binary huffman tree
 
     return text;
 }
@@ -131,10 +161,10 @@ static huffmanCode getHuffmanCode(binaryTree<huffmanNode>* tree, char character)
     }
 }
 
-static void ArrayifyTree(binaryTree<huffmanNode>* tree, char array[] , int index) {
+static void arrayifyTree(binaryTree<huffmanNode>* tree, char array[] , int index) {
     array[index] = tree->data.character;
-    if (tree->getRight() != nullptr) ArrayifyTree(tree->getLeft(), array, 2 * index + 1);
-    if (tree->getLeft() != nullptr) ArrayifyTree(tree->getRight(), array, 2 * index + 2);
+    if (tree->getLeft() != nullptr) arrayifyTree(tree->getLeft(), array, 2 * index + 1);
+    if (tree->getRight() != nullptr) arrayifyTree(tree->getRight(), array, 2 * index + 2);
 }
 
 static long long power(long long base, long long exp) {
@@ -143,4 +173,52 @@ static long long power(long long base, long long exp) {
         result *= base;
     }
     return result;
+}
+
+static binaryTree<char>* treeifyArray(char array[], int index) {
+    if (array[index] != 0) return new binaryTree<char>(array[index]);
+    binaryTree<char>* node = new binaryTree<char>(0);
+    node->setLeft(treeifyArray(array, 2 * index + 1));
+    node->setRight(treeifyArray(array, 2 * index + 2));
+    return node;
+}
+
+
+//UNTESTED
+static std::vector<char> compressArrayifiedTree(char array[], int length) {
+    std::vector<char> compressed;
+    compressed.push_back(0);
+    int i = 0;
+    while (array[i] == 0) {
+        compressed.back()++;
+        i++;
+    }
+    for (; i < length; i++) {
+        compressed.push_back(array[i]);
+        compressed.push_back(0);
+        while (array[i] == 0) {
+            compressed.back()++;
+            i++;
+        }
+    }
+    return compressed;
+}
+
+//UNTESTED
+static char* decompressArrayifiedTree(std::vector<char> vector, int length) {
+    int compressedIndex = 0;
+    int uncompressedIndex = 0;
+    char* uncompressed = new char[length];
+    int zeroCount = vector[compressedIndex++];
+    while(zeroCount > 0) {
+        uncompressed[uncompressedIndex++] = 0;
+    }
+    while((unsigned long long)compressedIndex < vector.size()) {
+        uncompressed[uncompressedIndex++] = vector[compressedIndex++];
+        zeroCount = vector[compressedIndex++];
+        while(zeroCount > 0) {
+            uncompressed[uncompressedIndex++] = 0;
+        }
+    }
+    return uncompressed;
 }

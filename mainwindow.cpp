@@ -71,8 +71,10 @@ void MainWindow::on_compressButton_clicked()
     qs = ui->input->toPlainText(); //bta5od el kalam mn el text edit
     string temp = qs.toStdString(); //
     string minified = minify(&temp);
-    string out = compress(&minified);
-    string count = to_string(out.length());
+    string compressed = compress(&minified);
+    //string decompressed = decompress(&compressed);
+    //prettyxml(&decompressed);
+    string count = to_string(compressed.length());
     ui -> output -> setPlainText(QString::fromStdString(count));
 }
 
