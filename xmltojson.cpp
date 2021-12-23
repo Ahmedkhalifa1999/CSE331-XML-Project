@@ -9,13 +9,17 @@
  **********************************************************************/
 #include "xmltojson.h"
 #include "minify.h"
-/* remove spacing at end of string */
+/*
+ Function Description:
+ remove spacing at end of string */
 string rtrim(const string &s)
 {
-    int end = s.find_last_not_of(" \n\r\t\f\v");
-    return (end == string::npos) ? "" : s.substr(0, end + 1);
+    int end = s.find_last_not_of(" \n\r\t\f\v");                      /* O(n*l) n : length of string , l : number of occurences of the string */
+    return (end == string::npos) ? "" : s.substr(0, end + 1);         /* O(n) , n : size of substring */
 }
 /*
+Function Description:
+
 Time & Space Complexity Analysis :
 Time complexity : O(n) , n string length
 Space complexity : O(1)
@@ -30,6 +34,8 @@ int get_index(string s, char c)
     return -1;
 }
 /*
+Function Description:
+
 Time & Space Complexity Analysis :
 Time complexity : O(n) , n space count/string length
 Space complexity : O(1)
@@ -49,9 +55,8 @@ This function used to convert the xml input as string into json format directly.
  Space complexity : O(n) , n stack size
  Time Complexity : O(n^2)  , xml lines(n) , each line length(m)
 */
-string convert(string *xml)
+string xmltojson(string *xml)
 {
-
     string json;
     vector<string> x(1);
     vector<string> j(1);
