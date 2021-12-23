@@ -10,6 +10,7 @@
 #include "compression.h"
 #include "prettyxml.h"
 #include "XMLtoJSON/xmltojson.h"
+#include <fstream>
 
 using namespace std;
 
@@ -61,8 +62,9 @@ void MainWindow::on_convertButton_clicked() {
 
 void MainWindow::on_compressButton_clicked()
 {
+
     /*
-    //Use fstream instead of Qstream to make it work or figure out a way around Qt enforcing UTF-8 encoding
+    //Works correctly, decompression still doesn't work correctly (problems with reading file)
     string input = ui->input->toPlainText().toStdString();
     input = minify(&input);
     string compressed = compress(&input);
@@ -75,11 +77,12 @@ void MainWindow::on_compressButton_clicked()
             return;
 
         }
-    QTextStream out(&file);
-    out << output;
+    std::ofstream out(file_name.toStdString());
+    out << compressed;
     file.flush();
     file.close();
     */
+
 
     string input = ui->input->toPlainText().toStdString();
     string minified = minify(&input);
@@ -88,6 +91,7 @@ void MainWindow::on_compressButton_clicked()
     prettyxml(&decompressed);
     QString output = QString::fromStdString(decompressed);
     ui->output->setPlainText(output);
+
 }
 
 void MainWindow::on_minifyButton_clicked()
@@ -108,8 +112,8 @@ void MainWindow::on_correctButton_clicked()
 
 void MainWindow::on_decompressButton_clicked()
 {
-    //Use fstream instead of Qstream to make it work
     /*
+    //fstream reaches end of file prematurely
     QString file_name=QFileDialog::getOpenFileName(this,"open the file");
        QFile file(file_name);
        file_path=file_name;
@@ -118,11 +122,27 @@ void MainWindow::on_decompressButton_clicked()
            return;
 
        }
-    QTextStream in(&file);
-    string input = in.readAll().toStdString();
-    file.close();
+    //QTextStream in(&file);
+    std::ifstream in(file_name.toStdString());
+    //int length = in.gcount();
+    //char inputArray[length+1];
+    //in.get(inputArray, length);
+    //inputArray[length] = 0;
+    //std::stringstream buffer;
+    //buffer << in.rdbuf();
+    //std::string input(std::istreambuf_iterator<char>{in}, {});
+    //string input = buffer.str();
+
+    string input;
+    char current;
+    in >> current;
+    while(!in.eof()) {
+        input.push_back(current);
+        in >> current;
+    }
     QString output = QString::fromStdString(decompress(&input));
     ui->output->setPlainText(output);
+    file.close();
     */
 }
 
