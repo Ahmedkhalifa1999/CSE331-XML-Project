@@ -16,6 +16,6 @@
    *BASE CASE* : found opening tag , data not contain another opening tag then it's leaf
 
 */
-void build_XML_Tree(std::string s);
+//void build_XML_Tree(std::string s);
 
 #endif // XML_TREE

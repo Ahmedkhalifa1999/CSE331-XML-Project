@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include <string>
+#include <vector>
+
 using namespace std;
 
 /* Tree Node Class */
@@ -20,6 +22,7 @@ class tree
 {
     tnode *root;
 public:
+    tree();
     void setRoot(tnode *root);
 };
 tnode* build_XML_Tree(string xml);

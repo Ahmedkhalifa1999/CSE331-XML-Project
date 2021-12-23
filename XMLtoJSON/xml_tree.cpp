@@ -1,4 +1,4 @@
-#include"xml_tree.h"
+#include "XMLtoJSON/xml_tree.h"
 /* Tree Node Class */
     tnode *  tnode:: getChild(int index)
     {
@@ -99,7 +99,7 @@
                     if (childTagname == currentClosingTag)
                     {
                         found = true;
-                        result->children.push_back(build_XML_Tree2(xml.substr(start, i - start)));
+                        result->children.push_back(build_XML_Tree(xml.substr(start, i - start)));
                       // cout<<"Children"<<xml.substr(start, i - start)<<'\n';
                    }
                    // i++;

@@ -52,8 +52,10 @@ void MainWindow::on_beautifyButton_clicked()
 void MainWindow::on_convertButton_clicked() {
 
     string input = ui->input->toPlainText().toStdString();
-    input = minify(&input);
-    QString output = QString::fromStdString(convert(&input));
+    string minified = minify(&input);
+    prettyxml(&input);
+    string json = xmltojson(&input);
+    QString output = QString::fromStdString(json);
     ui->output->setPlainText(output);
 
 }

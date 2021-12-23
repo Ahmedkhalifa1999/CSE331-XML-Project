@@ -8,7 +8,9 @@
  *
  **********************************************************************/
 #include "xmltojson.h"
-#include "minify.h"
+#include "compression.h"
+#include <vector>
+#include <stack>
 /*
  Function Description:
  remove spacing at end of string */
@@ -62,7 +64,7 @@ string xmltojson(string *xml)
     vector<string> j(1);
     int l = 0;
     int prev = -1, i;
-    for (i = 0; i < (*xml).length(); i++)
+    for (i = 0; i < xml->length(); i++)
     {
         if ((*xml)[i] == '\n')
         {
