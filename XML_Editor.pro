@@ -9,25 +9,27 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    XMLtoJSON/build_xml_tree.cpp \
+    XMLtoJSON/xml_tree.cpp \
+    XMLtoJSON/xmltojson.cpp \
     binaryTree.cpp \
     compression.cpp \
     consistency.cpp \
     main.cpp \
     mainwindow.cpp \
     prettyxml.cpp \
-    tree.cpp \
-    xml_tree.cpp \
-    xmltojson.cpp
+    tree.cpp
 
 HEADERS += \
+    XMLtoJSON/build_xml_tree.h \
+    XMLtoJSON/xml_tree.h \
+    XMLtoJSON/xmltojson.h \
     binaryTree.h \
     compression.h \
     consistency.h \
     mainwindow.h \
     prettyxml.h \
-    tree.h \
-    xml_tree.h \
-    xmltojson.h
+    tree.h
 
 FORMS += \
     mainwindow.ui

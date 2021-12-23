@@ -11,7 +11,7 @@
 #include "compression.h"
 #include "minify.h"
 #include "prettyxml.h"
-#include "xml_tree.h"
+#include "XMLtoJSON/xmltojson.h"
 
 using namespace std;
 
