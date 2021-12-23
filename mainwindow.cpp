@@ -26,16 +26,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-QString qs;
-string in;
-
 void MainWindow::on_checkError_clicked()
 {
-    qs = ui->input->toPlainText(); //bta5od el kalam mn el text edit
-    in = qs.toStdString(); //
-    bool flag = true;
-    //flag = detection(in);
-    if(flag == true){
+    string input = ui->input->toPlainText().toStdString();
+    if(detection(input) == true){
         ui->output->setPlainText("True");
     }
     else{
@@ -48,36 +42,89 @@ void MainWindow::on_checkError_clicked()
 
 void MainWindow::on_beautifyButton_clicked()
 {
-    qs = ui->input->toPlainText(); //bta5od el kalam mn el text edit
-    string temp = qs.toStdString(); //
-    temp = minify(&temp);
-    prettyxml(&temp);
-    QString out = QString::fromStdString(temp);
-    ui->output->setPlainText(out);
+    string input = ui->input->toPlainText().toStdString();
+    input = minify(&input);
+    prettyxml(&input);
+    QString output = QString::fromStdString(input);
+    ui->output->setPlainText(output);
 }
 
 void MainWindow::on_convertButton_clicked() {
 
-    qs = ui->input->toPlainText(); //bta5od el kalam mn el text edit
-    string in = qs.toStdString();
-    string minified = minify(&in);
-    string out = convert(&in);
-    ui->output->setPlainText(QString::fromStdString(out));
+    string input = ui->input->toPlainText().toStdString();
+    input = minify(&input);
+    QString output = QString::fromStdString(convert(&input));
+    ui->output->setPlainText(output);
 
 }
 
 void MainWindow::on_compressButton_clicked()
 {
-    qs = ui->input->toPlainText(); //bta5od el kalam mn el text edit
-    string temp = qs.toStdString(); //
-    string minified = minify(&temp);
+    //Use fstream instead of Qstream to make it work
+    /*
+    string input = ui->input->toPlainText().toStdString();
+    input = minify(&input);
+    string compressed = compress(&input);
+    QString output = QString::fromStdString(compressed);
+    QString file_name = QFileDialog::getSaveFileName(this,"open the file");
+        QFile file(file_name);
+        file_path=file_name;
+        if(!file.open(QFile::WriteOnly | QFile::Text)){
+            QMessageBox::warning(this,"...","file not open");
+            return;
+
+        }
+    QTextStream out(&file);
+    out << output;
+    file.flush();
+    file.close();
+    */
+
+    string input = ui->input->toPlainText().toStdString();
+    string minified = minify(&input);
     string compressed = compress(&minified);
     string decompressed = decompress(&compressed);
     prettyxml(&decompressed);
-    string count = to_string(compressed.length());
-    ui -> output -> setPlainText(QString::fromStdString(decompressed));
+    QString output = QString::fromStdString(decompressed);
+    ui->output->setPlainText(output);
+
 }
 
+void MainWindow::on_minifyButton_clicked()
+{
+    string input = ui->input->toPlainText().toStdString();
+    QString output = QString::fromStdString(minify(&input));
+    ui->output->setPlainText(output);
+}
+
+
+void MainWindow::on_correctButton_clicked()
+{
+    string input = ui->input->toPlainText().toStdString();
+    QString output = QString::fromStdString(correction(input));
+    ui->output->setPlainText(output);
+}
+
+
+void MainWindow::on_decompressButton_clicked()
+{
+    //Use fstream instead of Qstream to make it work
+    /*
+    QString file_name=QFileDialog::getOpenFileName(this,"open the file");
+       QFile file(file_name);
+       file_path=file_name;
+       if(!file.open(QFile::ReadOnly | QFile::Text)){
+           QMessageBox::warning(this,"...","file not open");
+           return;
+
+       }
+    QTextStream in(&file);
+    string input = in.readAll().toStdString();
+    file.close();
+    QString output = QString::fromStdString(decompress(&input));
+    ui->output->setPlainText(output);
+    */
+}
 
 void MainWindow::on_actionNew_triggered()
 {
@@ -139,7 +186,7 @@ void MainWindow::on_actionSave_as_triggered()
 
 void MainWindow::on_actionCut_triggered()
 {
- ui->input->cut();
+    ui->input->cut();
 }
 
 
@@ -152,36 +199,18 @@ void MainWindow::on_actionCopy_triggered()
 
 void MainWindow::on_actionPaste_triggered()
 {
-ui->input->paste();
+    ui->input->paste();
 }
 
 
 void MainWindow::on_actionRedo_triggered()
 {
-ui->input->redo();
+    ui->input->redo();
 }
 
 
 void MainWindow::on_actionUndo_triggered()
 {
-ui->input->undo();
-}
-
-
-void MainWindow::on_minifyButton_clicked()
-{
-
-}
-
-
-void MainWindow::on_correctButton_clicked()
-{
-
-}
-
-
-void MainWindow::on_decompressButton_clicked()
-{
-
+    ui->input->undo();
 }
 

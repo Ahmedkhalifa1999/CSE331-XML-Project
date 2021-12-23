@@ -10,7 +10,7 @@
 
 #ifndef XML_TO_JSON
 #define XML_TO_JSON
-#include <bits/stdc++.h>
+#include <string>
 using namespace std;
 /*
  Function Description:
