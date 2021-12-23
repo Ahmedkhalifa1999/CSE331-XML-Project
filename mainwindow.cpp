@@ -53,7 +53,6 @@ void MainWindow::on_convertButton_clicked() {
 
     string input = ui->input->toPlainText().toStdString();
     string minified = minify(&input);
-    prettyxml(&input);
     string json = xmltojson(&input);
     QString output = QString::fromStdString(json);
     ui->output->setPlainText(output);
