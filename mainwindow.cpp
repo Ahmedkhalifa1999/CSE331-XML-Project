@@ -62,10 +62,13 @@ void MainWindow::on_convertButton_clicked() {
 
 void MainWindow::on_compressButton_clicked()
 {
+
+    /*
     //Works correctly, decompression still doesn't work correctly (problems with reading file)
     string input = ui->input->toPlainText().toStdString();
     input = minify(&input);
     string compressed = compress(&input);
+    QString output = QString::fromStdString(compressed);
     QString file_name = QFileDialog::getSaveFileName(this,"open the file");
         QFile file(file_name);
         file_path=file_name;
@@ -74,10 +77,21 @@ void MainWindow::on_compressButton_clicked()
             return;
 
         }
-    std::ofstream out(file_name.toStdString(), ios_base::out | ios_base::binary);
+    std::ofstream out(file_name.toStdString());
     out << compressed;
     file.flush();
     file.close();
+    */
+
+
+    string input = ui->input->toPlainText().toStdString();
+    string minified = minify(&input);
+    string compressed = compress(&minified);
+    string decompressed = decompress(&compressed);
+    prettyxml(&decompressed);
+    QString output = QString::fromStdString(decompressed);
+    ui->output->setPlainText(output);
+
 }
 
 void MainWindow::on_minifyButton_clicked()
@@ -98,6 +112,8 @@ void MainWindow::on_correctButton_clicked()
 
 void MainWindow::on_decompressButton_clicked()
 {
+    /*
+    //fstream reaches end of file prematurely
     QString file_name=QFileDialog::getOpenFileName(this,"open the file");
        QFile file(file_name);
        file_path=file_name;
@@ -106,18 +122,28 @@ void MainWindow::on_decompressButton_clicked()
            return;
 
        }
-    std::ifstream in(file_name.toStdString(), ios_base::in | ios_base::binary);
+    //QTextStream in(&file);
+    std::ifstream in(file_name.toStdString());
+    //int length = in.gcount();
+    //char inputArray[length+1];
+    //in.get(inputArray, length);
+    //inputArray[length] = 0;
+    //std::stringstream buffer;
+    //buffer << in.rdbuf();
+    //std::string input(std::istreambuf_iterator<char>{in}, {});
+    //string input = buffer.str();
 
     string input;
-    char c;
-    while (in.get(c))
-        input.push_back(c);
-
-    string decompressed = decompress(&input);
-    prettyxml(&decompressed);
-    QString output = QString::fromStdString(decompressed);
+    char current;
+    in >> current;
+    while(!in.eof()) {
+        input.push_back(current);
+        in >> current;
+    }
+    QString output = QString::fromStdString(decompress(&input));
     ui->output->setPlainText(output);
     file.close();
+    */
 }
 
 void MainWindow::on_actionNew_triggered()
