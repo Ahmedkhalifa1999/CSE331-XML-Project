@@ -11,7 +11,7 @@ static void arrayifyTree(binaryTree<huffmanNode>* tree, char array[], int index 
 static long long power(long long base, long long exp);
 static binaryTree<char>* treeifyArray(char array[], int index = 0);
 static std::vector<char> compressArrayifiedTree(char array[], int length);
-static char* decompressArrayifiedTree(char* compressed, int length);
+static std::vector<char> decompressArrayifiedTree(char* compressed, int length);
 
 std::string minify(std::string* text) {
     std::string minified;
@@ -70,13 +70,15 @@ std::string compress(std::string *data) {
     std::string text;
     //Encoding huffman tree as text (INEFFICIENT FOR SMALL FILES)
     int depth = huffmanTree -> getDepth();
-    text.push_back((char)depth);
     char array[power(2, depth) - 1];
-    for (int i = 0; i < (depth * depth) - 1; i++) {
+    for (int i = 0; i < power(2, depth) - 1; i++) {
         array[i] = 0;
     }
     arrayifyTree(huffmanTree, array);
-    for (char character: array) {
+    std::vector compressedTree = compressArrayifiedTree(array, power(2, depth) - 1);
+    text.push_back((char)(compressedTree.size() >> 8));
+    text.push_back((char)compressedTree.size());
+    for (char character: compressedTree) {
         text.push_back(character);
     }
 
@@ -113,13 +115,13 @@ std::string compress(std::string *data) {
 
 std::string decompress(std::string* data) {
     //Build huffman tree
-    char depth = data->at(0);
-    char* treeArray = data->data() + 1;
-    binaryTree<char>* huffmanTree = treeifyArray(treeArray);
+    char* treeArray = data->data() + 2;
+    std::vector<char> decompressedTree = decompressArrayifiedTree(treeArray, (data->at(0) << 8) | data->at(1));
+    binaryTree<char>* huffmanTree = treeifyArray(decompressedTree.data());
 
     //Decode Text according to huffman tree
     //Get string length in bits from code
-    int index = power(2, depth);
+    int index = ((data->at(0) << 8) | data->at(1)) + 2; //length of tree array + bytes encoding its length
     unsigned long long totalBitCount = 0;
     for (int i = 7; i >= 0; i--) {
         totalBitCount |= (data->at(index) << i*8);
@@ -216,10 +218,10 @@ static std::vector<char> compressArrayifiedTree(char array[], int length) {
         compressed.back()++;
         i++;
     }
-    for (; i < length; i++) {
-        compressed.push_back(array[i]);
+    while (i < length) {
+        compressed.push_back(array[i++]);
         compressed.push_back(0);
-        while (array[i] == 0 && (unsigned char)compressed.back() < (unsigned char)255) {
+        while (array[i] == 0 && i < length && (unsigned char)compressed.back() < (unsigned char)255) {
             compressed.back()++;
             i++;
         }
@@ -228,21 +230,18 @@ static std::vector<char> compressArrayifiedTree(char array[], int length) {
 }
 
 //UNTESTED
-static char* decompressArrayifiedTree(char* compressed, int length) {
-    int compressedIndex = 0;
-    int uncompressedIndex = 0;
-    char* uncompressed = new char[length];
-    int zeroCount = compressed[compressedIndex++] << 8;
-    zeroCount |= compressed[compressedIndex++];
+static std::vector<char> decompressArrayifiedTree(char* compressed, int length) {
+    std::vector<char> uncompressed;
+    unsigned char zeroCount = compressed[0];
     while(zeroCount > 0) {
-        uncompressed[uncompressedIndex++] = 0;
+        uncompressed.push_back(0);
         zeroCount--;
     }
-    while(uncompressedIndex < length) {
-        uncompressed[uncompressedIndex++] = compressed[compressedIndex++];
-        zeroCount = compressed[compressedIndex++];
+    for (int i = 1; i < length; i+=2) {
+        uncompressed.push_back(compressed[i]);
+        zeroCount = compressed[i+1];
         while(zeroCount > 0) {
-            uncompressed[uncompressedIndex++] = 0;
+            uncompressed.push_back(0);
             zeroCount--;
         }
     }
