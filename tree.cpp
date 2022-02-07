@@ -1,4 +1,5 @@
 #include "tree.h"
+#include <string>
 
 template<typename T>
 tree<T>::tree(T data) {
@@ -32,3 +33,5 @@ tree<T>::~tree() {
         if (child != nullptr) delete child;
     }
 }
+
+template class tree<std::string>;

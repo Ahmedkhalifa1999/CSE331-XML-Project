@@ -211,9 +211,10 @@ void MainWindow::on_actionUndo_triggered()
 
 void MainWindow::on_visGraph_clicked()
 {
+    string directory = QDir::currentPath().toStdString();
     QDir::setCurrent(QDir::currentPath());
-        system("dot -Tpng -O Source.dot");
-        QPixmap p (QDir::currentPath() + "Source.dot.png");
-        ui->graph->setPixmap(p);
+    system("dot -Tpng -O Source.dot");
+    QPixmap p(QDir::currentPath() + "Source.dot.png");
+    ui->graph->setPixmap(p);
 }
 

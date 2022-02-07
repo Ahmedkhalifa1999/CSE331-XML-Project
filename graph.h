@@ -14,6 +14,8 @@ public:
     void addNode(nodeType node);
     void addNode(nodeType node, std::list<int> adjacent);
     void connectNodes(int source, int destination);
+
+    friend class SNgraph;
 };
 
 

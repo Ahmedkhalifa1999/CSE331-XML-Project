@@ -1,4 +1,5 @@
 #include "graph.h"
+#include "SNgraph.h"
 
 template<typename nodeType>
 graph<nodeType>::graph()
@@ -24,3 +25,5 @@ void graph<nodeType>::connectNodes(int source, int destination)
 {
     adjacencyLists[source].push_back(destination);
 }
+
+template class graph<user>;

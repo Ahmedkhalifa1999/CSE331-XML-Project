@@ -1,4 +1,5 @@
 #include "sngraph.h"
+#include <fstream>
 
 SNgraph::SNgraph(tree<std::string> parsed)
 {
@@ -18,6 +19,24 @@ SNgraph::SNgraph(tree<std::string> parsed)
     }
 }
 
-void SNgraph::visualize() {
+void SNgraph::visualize(std::string directory) {
+    std::string str;
 
+    //Farah's Code start here
+    for(int i=0 ; i < nodes.size() ; i++)
+    {
+        str += nodes[i].id;
+        str += " -> ";
+        for(int adjacent: adjacencyLists[i]){
+            str += adjacent;
+            str += " , ";
+        }
+        str.erase(str.end()-2 , str.end());
+        str += "\n";
+    }
+    //Farah's code ends here
+
+    std::ofstream out(directory + "Source.dot");
+    out << str;
+    out.close();
 }

@@ -16,7 +16,7 @@ class SNgraph : public graph<user>
 {
 public:
     SNgraph(tree<std::string> parsed);
-    void visualize();
+    void visualize(std::string directory);
 };
 
 #endif // SNGRAPH_H
