@@ -17,3 +17,7 @@ SNgraph::SNgraph(tree<std::string> parsed)
         followers.clear();
     }
 }
+
+void SNgraph::visualize() {
+
+}
