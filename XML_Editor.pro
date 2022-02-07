@@ -15,6 +15,7 @@ SOURCES += \
     binaryTree.cpp \
     compression.cpp \
     consistency.cpp \
+    graph.cpp \
     main.cpp \
     mainwindow.cpp \
     prettyxml.cpp \
@@ -27,6 +28,7 @@ HEADERS += \
     binaryTree.h \
     compression.h \
     consistency.h \
+    graph.h \
     mainwindow.h \
     prettyxml.h \
     tree.h
