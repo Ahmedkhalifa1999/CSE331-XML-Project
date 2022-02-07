@@ -19,6 +19,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     prettyxml.cpp \
+    sngraph.cpp \
     tree.cpp
 
 HEADERS += \
@@ -31,6 +32,7 @@ HEADERS += \
     graph.h \
     mainwindow.h \
     prettyxml.h \
+    sngraph.h \
     tree.h
 
 FORMS += \
