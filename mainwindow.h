@@ -48,6 +48,10 @@ private slots:
 
     void on_decompressButton_clicked();
 
+    void on_pushButton_clicked();
+
+    void on_visGraph_clicked();
+
 private:
     Ui::MainWindow *ui;
     QString file_path;

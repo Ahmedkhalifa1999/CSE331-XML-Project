@@ -11,7 +11,7 @@
 #include "prettyxml.h"
 #include "XMLtoJSON/xmltojson.h"
 #include <fstream>
-
+#include <QDir>
 using namespace std;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -206,5 +206,14 @@ void MainWindow::on_actionRedo_triggered()
 void MainWindow::on_actionUndo_triggered()
 {
     ui->input->undo();
+}
+
+
+void MainWindow::on_visGraph_clicked()
+{
+    QDir::setCurrent(QDir::currentPath());
+        system("dot -Tpng -O Source.dot");
+        QPixmap p (QDir::currentPath() + "Source.dot.png");
+        ui->graph->setPixmap(p);
 }
 
