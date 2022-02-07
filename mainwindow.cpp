@@ -217,9 +217,8 @@ void MainWindow::on_visGraph_clicked()
     string input = ui->input->toPlainText().toStdString();
     input = minify(&input);
     parseXML(input, xmlTree);
-    string directory = QDir::currentPath().toStdString();
     SNgraph SocialNetwork(xmlTree);
-    SocialNetwork.visualize(directory);
+    SocialNetwork.visualize();
     QDir::setCurrent(QDir::currentPath());
     system("dot -Tpng -O Source.dot");
     QPixmap p(QDir::currentPath() + "Source.dot.png");

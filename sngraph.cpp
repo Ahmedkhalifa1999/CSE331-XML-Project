@@ -22,10 +22,10 @@ SNgraph::SNgraph(tree<std::string> parsed)
     }
 }
 
-void SNgraph::visualize(std::string directory) {
+void SNgraph::visualize() {
     std::string str;
 
-    //Farah's Code start here
+    //Farah's Code starts here
     for(unsigned long long i=0 ; i < nodes.size() ; i++)
     {
         str += std::to_string(nodes[i].id);
