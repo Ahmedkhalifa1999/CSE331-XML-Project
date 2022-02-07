@@ -1,3 +1,6 @@
+#ifndef TREE_H
+#define TREE_H
+
 #include <vector>
 
 template<typename T>
@@ -13,5 +16,7 @@ public:
     void addChild(T data);
     bool isLeaf();
 
-    ~tree();
+    //~tree();
 };
+
+#endif //TREE_H

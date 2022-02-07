@@ -18,6 +18,7 @@ SOURCES += \
     graph.cpp \
     main.cpp \
     mainwindow.cpp \
+    parseXML.cpp \
     prettyxml.cpp \
     sngraph.cpp \
     tree.cpp
@@ -31,6 +32,7 @@ HEADERS += \
     consistency.h \
     graph.h \
     mainwindow.h \
+    parseXML.h \
     prettyxml.h \
     sngraph.h \
     tree.h

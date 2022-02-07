@@ -12,6 +12,8 @@
 #include "XMLtoJSON/xmltojson.h"
 #include <fstream>
 #include <QDir>
+#include "sngraph.h"
+#include "parseXML.h"
 using namespace std;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -211,7 +213,13 @@ void MainWindow::on_actionUndo_triggered()
 
 void MainWindow::on_visGraph_clicked()
 {
+    tree<string> xmlTree("");
+    string input = ui->input->toPlainText().toStdString();
+    input = minify(&input);
+    parseXML(input, xmlTree);
     string directory = QDir::currentPath().toStdString();
+    SNgraph SocialNetwork(xmlTree);
+    SocialNetwork.visualize(directory);
     QDir::setCurrent(QDir::currentPath());
     system("dot -Tpng -O Source.dot");
     QPixmap p(QDir::currentPath() + "Source.dot.png");

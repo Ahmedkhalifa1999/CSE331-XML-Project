@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stack>
 #include <string>
-#include "Tree.h"
+#include "tree.h"
 #include <fstream>
 
 
@@ -9,17 +9,17 @@
 Description : extracting closing or openning tag name
 */
 
-string extract(int *left, string *mini);
+std::string extract(int *left, std::string *mini);
 
 /*
 Description : extracting data
 */
 
-string extractdata(int *left, string *mini);
+std::string extractdata(int *left, std::string *mini);
 
 /*
 Description :
 input to function minified XML we build the XML tree out of it.
 */
 
-void parseXML(string &mini, tree<string> &xml);
+void parseXML(std::string &mini, tree<std::string> &xml);

@@ -9,7 +9,7 @@
 typedef struct{
     int id;
     std::string name;
-    std::vector<std::string> posts;
+    //std::vector<std::string> posts; //Posts ignored for now, need a new struct post to encapsulate body and topics
 }user;
 
 class SNgraph : public graph<user>

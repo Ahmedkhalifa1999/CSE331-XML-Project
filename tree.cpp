@@ -27,11 +27,13 @@ bool tree<T>::isLeaf() {
     return tree<T>::children.empty();
 }
 
+/*
 template<typename T>
 tree<T>::~tree() {
     for (tree<T>* child: tree<T>::children) {
         if (child != nullptr) delete child;
     }
 }
+*/
 
 template class tree<std::string>;

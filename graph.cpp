@@ -1,5 +1,5 @@
 #include "graph.h"
-#include "SNgraph.h"
+#include "sngraph.h"
 
 template<typename nodeType>
 graph<nodeType>::graph()
