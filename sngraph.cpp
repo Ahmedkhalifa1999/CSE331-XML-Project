@@ -30,7 +30,7 @@ void SNgraph::visualize() {
 
         for (unsigned long long i = 0; i < nodes.size(); i++)
         {
-            str += std::to_string(nodes[i]);  //lazm integer 3shan tostring
+            str += std::to_string(nodes[i].id);
             str += " -> {";
             for (int adjacent : adjacencyLists[i]) {
                 str += std::to_string(adjacent);
