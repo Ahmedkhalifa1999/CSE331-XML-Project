@@ -26,7 +26,24 @@ void SNgraph::visualize() {
     std::string str;
 
     //Farah's Code starts here
-    for(unsigned long long i=0 ; i < nodes.size() ; i++)
+    str = "diagraph test { \n";
+
+        for (unsigned long long i = 0; i < nodes.size(); i++)
+        {
+            str += std::to_string(nodes[i]);  //lazm integer 3shan tostring
+            str += " -> {";
+            for (int adjacent : adjacencyLists[i]) {
+                str += std::to_string(adjacent);
+                str += " , ";
+            }
+            str.erase(str.end() - 2, str.end());
+            str += "} \n";
+
+        }
+        str += "}";
+       // cout << str; //MAZBOT
+
+    /*for(unsigned long long i=0 ; i < nodes.size() ; i++)
     {
         str += std::to_string(nodes[i].id);
         str += " -> ";
@@ -37,7 +54,7 @@ void SNgraph::visualize() {
         str.erase(str.end()-2 , str.end());
         str += "\n";
     }
-    //Farah's code ends here
+    //Farah's code ends here*/
 
     std::ofstream out("Source.dot");
     out << str;
