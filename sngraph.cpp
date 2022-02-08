@@ -26,7 +26,7 @@ void SNgraph::visualize() {
     std::string str;
 
     //Farah's Code starts here
-    str = "diagraph test { \n";
+    str = "digraph test { \n";
 
         for (unsigned long long i = 0; i < nodes.size(); i++)
         {
